@@ -141,6 +141,29 @@ public class Game {
 
 
     /**
+     *
+     * @param grid 2D array of characters representing the game board
+     * @return true if all the moves are finished
+     */
+
+    public boolean checkIsAllMoveDone(char [][]grid){
+
+        char target = '-';
+
+        for(int countRow = 0; countRow < 3; countRow++){
+            for (int countCollum = 0; countCollum < 3; countCollum++){
+                if(grid[countRow][countCollum] == target){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+
+
+    /**
      * Checks if the game has ended either because a player has won, or if the game has ended as a tie.
      * If game hasn't ended the return string has to be "None",
      * If the game ends as tie, the return string has to be "Tie",
@@ -150,7 +173,40 @@ public class Game {
      */
     public String checkGameWinner(char [][]grid){
         String result = "None";
-        //Student code goes here ...
+        boolean isAllMoveDone = checkIsAllMoveDone(grid);
+        char target = '-';
+
+        if(grid[0][0] == grid[0][1] && grid[0][1] == grid[0][2] && !(target == grid[0][0])){
+            result = Character.toUpperCase(grid[0][0]) + " Wins";
+        }
+        else if(grid[1][0] == grid[1][1] && grid[1][1] == grid[1][2] && !(target == grid[1][0])){
+            result = Character.toUpperCase(grid[1][0])+ " Wins";
+        }
+        else if(grid[2][0] == grid[2][1] && grid[2][1] == grid[2][2] && !(target == grid[2][0])){
+            result = Character.toUpperCase(grid[2][0])+ " Wins";
+        }
+        else if(grid[0][0] == grid[1][0] && grid[1][0] == grid[2][0] && !(target == grid[0][0])){
+            result = Character.toUpperCase(grid[0][0])+ " Wins";
+        }
+        else if(grid[0][1] == grid[1][1] && grid[1][1] == grid[2][1] && !(target == grid[0][1])){
+            result = Character.toUpperCase(grid[0][1])+ " Wins";
+        }
+        else if(grid[0][2] == grid[1][2] && grid[1][2] == grid[2][2] && !(target == grid[0][2])){
+            result = Character.toUpperCase(grid[0][2])+ " Wins";
+        }
+        else if(grid[0][0] == grid[1][1] && grid[1][1] == grid[2][2] && !(target == grid[0][0])){
+            result = Character.toUpperCase(grid[0][0])+ " Wins";
+        }
+        else if(grid[2][0] == grid[1][1] && grid[1][1] == grid[0][2] && !(target == grid[2][0])){
+            result = Character.toUpperCase(grid[2][0])+ " Wins";
+        }
+
+        isAllMoveDone = checkIsAllMoveDone(grid);
+
+        if(isAllMoveDone && result.equals("None")){
+            result = "Tie";
+        }
+
         return result;
     }
 
